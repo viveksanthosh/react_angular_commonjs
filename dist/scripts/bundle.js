@@ -40676,24 +40676,44 @@ app.controller('twoCtrl', require('./pageTwo'));
 
 },{"./pageOne":7,"./pageTwo":8,"./parent":9,"angular":4}],7:[function(require,module,exports){
 "use strict";
-module.exports = function() {
+module.exports = function($scope) {
 
+    $scope.init = function () {
+
+        $scope.$parent.interval = '0';
+    };
 
 };
 
 },{}],8:[function(require,module,exports){
 "use strict";
-module.exports = function() {
+module.exports = function ($scope, $timeout) {
 
+    $scope.init = function () {
+        $scope.values = [];
+        $scope.$parent.interval = parseInt($scope.$parent.interval);
+        var count = 0;
+        var time = function (c) {
+            $timeout(function () {
+                console.log(c);
+                console.log($scope.values);
+                $scope.values.push(c + $scope.$parent.interval);
+            }, 10);
+        };
 
-
+        for (count = 0; count < 500; count++) {
+            time(count);
+        }
+    };
 };
 
 },{}],9:[function(require,module,exports){
 "use strict";
-module.exports = function () {
+module.exports = function ($scope) {
 
-
+    $scope.init = function () {
+        $scope.interval = '0';
+    };
 
 };
 
