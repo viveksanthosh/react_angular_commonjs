@@ -29336,25 +29336,50 @@ arguments[4][155][0].apply(exports,arguments)
  */
 'use strict';
 var React = require('React');
-
+var Two = require('./compTwo');
 var One = React.createClass({displayName: "One",
     getInitialState: function () {
-        return {data: 'Hello'};
+        return {data: []};
     },
     componentDidMount: function () {
         var that = this;
-        setTimeout( function(){that.setState({data: 'bye'});},100);
+        setTimeout(function () {
+            that.setState({data: [2, 3, 4]});
+        }, 100);
     },
     render: function () {
         return (
-            React.createElement("div", null, this.state.data)
+            React.createElement(Two, {data: this.state.data})
         );
     }
 });
 
 module.exports = One;
 
-},{"React":155}],314:[function(require,module,exports){
+},{"./compTwo":314,"React":155}],314:[function(require,module,exports){
+/**
+ * Created by vivek_000 on 07-02-2016.
+ */
+'use strict';
+var React = require('React');
+
+var Two = React.createClass({displayName: "Two",
+    render: function () {
+        var list = this.props.data.map(function (data) {
+            return React.createElement("li", null, " ", data, " ")
+        });
+
+        return (
+            React.createElement("ul", null, 
+                list
+            )
+        );
+    }
+});
+
+module.exports = Two;
+
+},{"React":155}],315:[function(require,module,exports){
 $ = jQuery = require('jquery');
 
 var React = require('react');
@@ -29362,4 +29387,4 @@ var One = require('./comps/compOne');
 
 
 React.render(React.createElement(One, null), document.getElementById('app'));
-},{"./comps/compOne":313,"jquery":157,"react":312}]},{},[314]);
+},{"./comps/compOne":313,"jquery":157,"react":312}]},{},[315]);
